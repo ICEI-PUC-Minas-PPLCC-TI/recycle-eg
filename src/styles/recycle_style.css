@@ -1,7 +1,7 @@
 body
 {
     background-color: #F2F2F2;
-    margin-top: -25px;
+    margin-top: 0px;
     margin-left: 0px;
     margin-right: 0px;
 }
@@ -10,9 +10,40 @@ body
 
 #recycle_header
 {
-    padding: 3px;
+    padding: 5px;
     background-color: #55A605;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, .3);
+}
+
+#recycle_footer
+{
+    background-color: #55A605;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, .3);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#recycle_header ul
+{
+    display: block;
+    float: right;
+    position: relative;
+    top: -10px;
+}
+
+#recycle_header ul li
+{
+    display: inline-flex;
+    margin-right: 10px;
+    color: #F2F2F2;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#recycle_header ul li:hover
+{
+    color: #C9C9C9;
+    cursor: pointer;
 }
 
 #recycle_mainbody

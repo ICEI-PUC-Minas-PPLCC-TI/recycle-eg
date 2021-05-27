@@ -1,8 +1,13 @@
 $(document).ready(function () {
 
-    OnShowLogin();
-    var _data = new data();
+    new data();
+
     console.log(loadedData.getData());
+    if (loadedData.isMounted()) {
+        console.log("Welcome back " + loadedData.mountedUser().username);
+    }
+
+    OnShowLogin();
 
     //login elements
     let inputUser = $(".input_user");
@@ -17,6 +22,26 @@ $(document).ready(function () {
         let register_button = $(".back_login");
         register_button.unbind("click", onRegister);
         register_button.bind("click", onRegister);
+    });
+
+    loginButton.click(function () {
+        var uservalue = inputUser.val();
+        var passvalue = inputPass.val();
+        console.log("login with:" + uservalue + ", " + passvalue);
+
+        if (uservalue.length == 0 || passvalue.length == 0) {
+            alert("Por favor, preencha os campos !");
+            return;
+        }
+
+        var loggedUser = loadedData.getUser(uservalue, passvalue);
+        if (loggedUser != null) {
+            loadedData.mountUser(loggedUser);
+            console.log("Login success: ", loggedUser.username);
+        }
+        else {
+            alert("Usuário ou senha inválido");
+        }
     });
 });
 
@@ -69,6 +94,5 @@ function OnShowLogin() {
 function CreateUser(username, password, email) {
     // JSON.stringify
     var newUser = new user(username, email, password);
-    var db = new data();
     loadedData.registerUser(newUser);
 }

@@ -1,10 +1,12 @@
 var users = [];
+var mountedUser;
+
 function data() {
 
     var loadedJson = localStorage.getItem("users_data");
     if (loadedJson == null) {
         console.log("users_data is null, initializing a new one...");
-        save();
+        loadedData.save();
     }
     else {
         users = JSON.parse(loadedJson);
@@ -32,5 +34,30 @@ let loadedData =
     ,
     getData: function () {
         return users;
+    },
+    getUser: function (username, password) {
+
+        var foundUser;
+
+        users.forEach(element => {
+            if (username == element.username) {
+                if (password == element.password) {
+                    foundUser = element;
+                }
+            }
+        });
+
+        return foundUser;
+    }
+    ,
+    mountUser: function (user) {
+        mountedUser = user;
+        localStorage.setItem("user_mounteduser", JSON.stringify(mountedUser));
+    },
+    mountedUser: function () {
+        return JSON.parse(localStorage.getItem("user_mounteduser"));
+    },
+    isMounted: function () {
+        return localStorage.getItem("user_mounteduser") != null;
     }
 }

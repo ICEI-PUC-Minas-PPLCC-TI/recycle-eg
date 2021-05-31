@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Recycle.eg</title>
+    <link rel="stylesheet" href="../styles/recycle_style.css">
+</head>
+
+<body>
+    <header id="recycle_header">
+
+        <!-- scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="../scripts/user_info.js"></script>
+
+        <a href="../../index.html"><img src="../img/logo.png" width="150"></a>
+        <ul id="recycle_header_buttons">
+            <li><a href="pontosdedescartes.html">Ponto de descarte</a></li>
+            <li>Perfil</li>
+        </ul>
+    </header>
+    <section id="recycle_mainbody" style="margin-bottom: 50px;">
+        <h1 id="recycle_h1" class="data_user_fname">
+            Usuário
+        </h1>
+        <!-- Documento original de: Milena Barreira -->
+        <!-- Revisão: Pedro Pereira Lourenço -->
+        <!-- Mudanças: id's trocada para os valores definidos dentro do arquivo de estilo recycle_style.css. 
+            forms modificada para seguir o estilo do site, porém mantendo as implementações previamente adicionadas
+            por Milena Barreia. Alteração do script: parte.js para user_info.js, alterando os nomes das funções e adptando para
+            jquery -->
+        <form>
+            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Nome</h2>
+            <input id="recycle_input_normal" class="input_data_user_fname" placeholder="nome" required="" value="">
+            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Sobrenome</h2>
+            <input id="recycle_input_normal" class="input_data_user_lname" placeholder="sobrenome" required="" value="">
+            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Sexo</h2>
+            <select id="recylce_select_fat" name="select">
+                <option value="1">Masculino</option>
+                <option value="2">Feminino</option>
+                <option value="3">Outro</option>
+                <option value="4">Prefiro não dizer</option>
+            </select>
+            <h2 id="recycle_h2">email</h2>
+            <input id="recycle_input_normal" class="input_data_user_email" placeholder="email" required="" value="">
+            <h2 id="recycle_h2">CEP</h2>
+            <input id="recycle_input_normal" class="input_data_user_cep" placeholder="apenas números" required="" value="">
+            <button id="recycle_button" class="search" onclick="return false">Pesquisar</button>
+            <ul class="recyle_ul_standard">
+                <li>
+                    <p id="recycle_p" style="padding-right: 10px; width: 50px;">Cidade</p>
+                    <input id="recycle_input_normal" class="input_data_user_city" placeholder="cidade" required="" value=""
+                        readonly="readonly">
+                </li>
+                <li>
+                    <p id="recycle_p" style="padding-right: 10px; width: 50px;">Estado</p>
+                    <input id="recycle_input_normal" class="input_data_user_state" placeholder="estado" required="" value=""
+                        readonly="readonly">
+                </li>
+                <li>
+                    <p id="recycle_p" style="padding-right: 10px; width: 50px;">Rua</p>
+                    <input id="recycle_input_normal" class="input_data_user_strt" placeholder="rua" required="" value=""
+                        readonly="readonly">
+                </li>
+                <li>
+                    <p id="recycle_p" style="padding-right: 10px; width: 50px;">Bairro</p>
+                    <input id="recycle_input_normal" class="input_data_user_dtrct" placeholder="bairro" required="" value=""
+                        readonly="readonly">
+                </li>
+            </ul>
+            <button id="recycle_button" class="submit" style="height: 50px; width: 100px;">Confirmar</button>
+            <button id="recycle_button_red" class="cancel" onclick="location.href='../../../index.html'; return false"
+                style="height: 50px; width: 100px;">Cancelar</button>
+        </form>
+    </section>
+    <footer id="recycle_footer">
+        <p style="font-family: Arial, Helvetica, sans-serif; color: white; font-size: 12px;">All rights reserved</p>
+    </footer>
+</body>
+
+</html>

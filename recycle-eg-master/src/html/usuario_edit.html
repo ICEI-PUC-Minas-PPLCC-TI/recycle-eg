@@ -4,9 +4,12 @@
 <head>
     <title>Recycle.eg</title>
     <link rel="stylesheet" href="../styles/recycle_style.css">
+   
 </head>
 
 <body>
+  
+  
     <header id="recycle_header">
 
         <!-- scripts -->
@@ -42,35 +45,34 @@
                 <option value="4">Prefiro não dizer</option>
             </select> -->
             <h2 id="recycle_h2">email</h2>
-            <input id="recycle_email" class="input_data_user_email" placeholder="email" required="" value="">
+            <input id="recycle_input_normal" class="input_data_user_email" placeholder="email" required="" value="">
             <h2 id="recycle_h2">CEP</h2>
-            <input id="recycle_cep" class="input_data_user_cep" placeholder="apenas números" required=""
+            <input id="recycle_input_normal" class="input_data_user_cep" placeholder="apenas números" required=""
                 value="">
             <button id="recycle_button_1" class="search" onclick="return false">Pesquisar</button>
             <ul class="recyle_ul_standard">
                 <li>
                     <p id="recycle_p" style="padding-right: 10px; width: 50px;">Cidade</p>
-                    <input id="recycle_cidade" class="input_data_user_city" placeholder="cidade" required=""
-                        value="">
+                    <input id="recycle_input_normal" class="input_data_user_city" placeholder="cidade" required=""
+                        value="Belo Horizonte">
                 </li>
                 <li>
                     <p id="recycle_p" style="padding-right: 10px; width: 50px;">Estado</p>
-                    <input id="recycle_estado" class="input_data_user_state" placeholder="estado" required=""
-                        value="" >
+                    <input id="recycle_input_normal" class="input_data_user_state" placeholder="estado" required=""
+                        value="Minas Gerais" >
                 </li>
                 <li>
                     <p id="recycle_p" style="padding-right: 10px; width: 50px;">Rua</p>
-                    <input id="recycle_rua" class="input_data_user_strt" placeholder="rua" required="" value=""
+                    <input id="recycle_input_normal" class="input_data_user_strt" placeholder="rua" required="" value=""
                         >
                 </li>
                 <li>
                     <p id="recycle_p" style="padding-right: 10px; width: 50px;">Bairro</p>
-                    <input id="recycle_bairro" class="input_data_user_dtrct" placeholder="bairro" required=""
+                    <input id="recycle_input_normal" class="input_data_user_dtrct" placeholder="bairro" required=""
                         value="" >
                 </li>
             </ul>
-            <button id="recycle_button" class="submit" style="height: 50px; width: 100px;">Confirmar</button>
-            <button id="recycle_button_red" class="cancel" onclick="location.href='dashboard.html'; return false"
+            <button id="recycle_button" class="submit" style="height: 50px; width: 100px;">Confirmar</button>            <button id="recycle_button_red" class="cancel" onclick="location.href='dashboard.html'; return false"
                 style="height: 50px; width: 100px;">Cancelar</button>
         </form>
     </section>
@@ -83,49 +85,93 @@
     </script>
 
     <script>
+$(".nome").val(usuarioCorrente.nome);
+$(".input_data_user_email").val(usuarioCorrente.email);
+$(".input_data_user_strt").val(usuarioCorrente.rua);
+$(".input_data_user_dtrct").val(usuarioCorrente.bairro);
+var nomes = usuarioCorrente.nome.split(" ");
+
+console.log(nomes);
+
+var sobrenome = nomes[nomes.length - 1];
+
+console.log(sobrenome);
+
+$(".input_data_user_lname").val(sobrenome);
+$(".submit").bind("click", onClick);
+function onClick(){
+    db_usuarios.usuarios.forEach(element => {
+        if(element.id == usuarioCorrente.id){
+            element.nome = $(".nome").val();
+            element.login = $(".nome").val();
+            element.email = $(".input_data_user_email").val();
+            element.rua = $(".input_data_user_strt").val();
+            element.bairro = $(".input_data_user_dtrct").val();
+            localStorage.setItem("db_usuarios", JSON.stringify(db_usuarios));
+            $(".nome").val(element.nome);
+            $(".input_data_user_email").val(element.email);
+            $(".input_data_user_strt").val(element.rua);
+            $(".input_data_user_dtrct").val(element.bairro);
+            var nomes = element.nome.split(" ");
+            var sobrenome = nomes[nomes.length - 1];
+            $(".input_data_user_lname").val(sobrenome);
+            usuarioCorrente = element;
+            sessionStorage.setItem("usuarioCorrente", JSON.stringify(element));
+        }
+        console.log(element)
+    });
+    console.log(usuarioCorrente.nome);
+    console.log(usuarioCorrente.email);
+    console.log(usuarioCorrente.rua);
+    console.log(usuarioCorrente.bairro);
+}
+
+
+
 
         // Declara uma função para processar o formulário de login
-        function processaFormLogin(event) {
+         // Declara uma função para processar o formulário de login
+        
+       // function processaFormLogin(event) {
             // Cancela a submissão do formulário para tratar sem fazer refresh da tela
-            event.preventDefault();
+          //  event.preventDefault();
 
             // Obtem os dados de login e senha a partir do formulário de login
-            var username = document.getElementById('recycle_nome').value;
-            var password = document.getElementById('recycle_sobrenome').value;
+            //var username = document.getElementById('recycle_nome').value;
+           // var password = document.getElementById('recycle_sobrenome').value;
 
             // Valida login e se estiver ok, redireciona para tela inicial da aplicação
-            resultadoLogin = loginUser(username, password);
+           // resultadoLogin = loginUser(username, password);
             
-        }
+        //}
 
 
 
-        function salvaLogin(event) {
+       // function salvaLogin(event) {
             // Cancela a submissão do formulário para tratar sem fazer refresh da tela
-            event.preventDefault();
+           // event.preventDefault();
 
             // Obtem os dados do formulário
-            let login = document.getElementById('recycle_nome').value;
-            let nome = document.getElementById('recycle_sobrenome').value;
-            let bairro = document.getElementById('recycle_bairro').value;
-            let rua = document.getElementById('recycle_cep').value;
-            let email = document.getElementById('recycle_email').value;
-            let senha = document.getElementById('recycle_cidade').value;
-            let senha2 = document.getElementById('recycle_rua').value;
+           // let login = document.getElementById('recycle_nome').value;
+           // let nome = document.getElementById('recycle_sobrenome').value;
+           // let bairro = document.getElementById('recycle_bairro').value;
+            //let rua = document.getElementById('recycle_cep').value;
+            //let email = document.getElementById('recycle_email').value;
+            //let senha = document.getElementById('recycle_cidade').value;
+            //let senha2 = document.getElementById('recycle_rua').value;
             // Adiciona o usuário no banco de dados
-            addUser(nome, login, bairro, rua, email, senha);
-            alert('Dados atualizados com sucesso. ');
+            //addUser(nome, login, bairro, rua, email, senha);
+            //alert('Dados atualizados com sucesso. ');
             // Oculta a div modal do login
             //document.getElementById ('loginModal').style.display = 'none';
-            $('#loginModal').modal('hide');
-        }
+        //    $('#loginModal').modal('hide');
+       // }
+      
 
-        // Associa a funçao processaFormLogin  formulário adicionando um manipulador do evento submit
-        document.getElementById('login-form').addEventListener('submit', processaFormLogin);
-
-
-        // Associar salvamento ao botao
-        document.getElementById('recycle_button').addEventListener('click', salvaLogin);
+   
+   
+   
+   
    </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

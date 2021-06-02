@@ -320,3 +320,31 @@ body
     margin: 5px;
     display: inline-flex;
 }
+
+.grid_cor1{
+    display: block;
+    background: #c9c5c5; 
+    min-height: 50px; 
+    padding-right: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 10px; 
+    width: 100%;
+}
+
+.grid_cor1 h2, .grid_cor1 p
+{
+    height: 10px;
+    padding-top: 2px;
+    padding-left: 15px;
+}
+
+.col-4{
+    width: 60%;
+    display: block; 
+    margin: 0px auto;
+}
+
+.grid_cor1 span{
+    font-size: 20px;
+    margin-left: 65%;
+}

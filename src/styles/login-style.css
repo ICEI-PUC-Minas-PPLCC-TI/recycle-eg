@@ -1,0 +1,164 @@
+
+body{
+    background-color:#55a605;
+}
+img {
+    position: absolute;
+    top: 10%;
+    left: 36%
+}
+h2 {
+    font-family: Verdana;
+    font-weight: 100;
+    color:#55a605
+}
+
+.popup {
+    position: absolute;
+    top: -190%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.25);
+    width: 380px;
+    padding: 20px 30px;
+    background: #fff;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    transition: top 0ms ease-in-out 200ms,
+        opacity 200ms ease-in-out 0ms,
+        transform 200ms ease-in-out 0ms;
+}
+
+.popup.active {
+    top: 55%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: top 0ms ease-in-out 0ms,
+        opacity 200ms ease-in-out 0ms,
+        transform 200ms ease-in-out 0ms;
+}
+
+.popup .form h2 {
+    text-align: center;
+    margin: 10px 0px 20px;
+    font-size: 25px;
+}
+
+.popup .form .form-element {
+    margin: 15px 0px;
+}
+
+.popup .form .form-element label, p {
+    font-size: 17px;
+    color:#000000;
+}
+
+.popup .form .form-element input[type="text"],
+.popup .form .form-element input[type="password"] {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #488c04;
+    border-radius: 5px;
+    transition: 0.25s;
+}
+
+.popup .form .form-element input[type="text"]:hover,
+.popup .form .form-element input[type="password"]:hover {
+    border-color: #488c04;
+    border-radius: 24px;
+}
+
+.popup .form .form-element input[type="text"]:focus,
+.popup .form .form-element input[type="password"]:focus {
+    border-color:  #55a605;
+    border-radius: 24px;
+
+}
+
+.popup .form .form-element input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.popup .form .form-element button {
+    width: 100%;
+    height: 40px;
+    border-color: #55a605;
+    outline: none;
+    font-size: 16px;
+    background: rgb(255, 255, 255);
+    color: #55a605;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: 0.25s
+}
+
+.popup .form .form-element button:hover {
+    color: white;
+    background-color: #55a605;
+    border-color: white;
+}
+
+.popup .form .form-element a {
+    display: block;
+    text-align: right;
+    font-size: 15px;
+    color: #55a605;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.button-box {
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 5px #bed95f;
+    border-radius: 30px;
+}
+
+.toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    transition: 0.25s;
+    color: rgb(0, 0, 0);
+}
+
+#btn {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(to right, #ffffff, #bed95f);
+    transition: 0.5s;
+    border-radius: 30px;
+
+}
+
+@media (max-width: 415px) {
+    .popup{
+        width: 100%;
+    }
+}
+
+@media (min-width: 1300px) {
+    .popup{
+        width: 40%;
+
+    }
+}
+
+@media (min-width: 416px) and (max-width: 1299px) {
+    .popup{
+        width: 80%;
+
+    }
+}
+
+/* fim Style do sistema de login  */

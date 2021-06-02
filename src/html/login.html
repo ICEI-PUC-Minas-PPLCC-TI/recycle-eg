@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/login-style.css">
+    <script src="../scripts/caixaLogin.js"></script>
+    <title>Login</title>
+</head>
+
+<body>
+    <img src="../img/logo.png" width="450">
+    <div class="popup">
+        <div class="form">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Entrar</button>
+                <button type="button" class="toggle-btn" onclick="registrar()">Registrar</button>
+            </div>
+            <form id="login-form" class="form" method="post" onsubmit="loginUser (this)">
+                <h2>Bem-vindo.</h2>
+                <div class="form-element">
+                    <label for="username" class="text-info">Usuário</label><br>
+                    <input type="text" name="username" id="username" class="form-control">
+
+                </div>
+                <div class="form-element">
+                    <label for="password" class="text-info">Senha</label><br>
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
+                <div class="form-element">
+                    <button type="submit" name="submit">Efetuar Login</button>
+                </div>
+            </form>
+            <div id="registrar">
+                <form id="login-form" class="form" method="post" onsubmit="loginUser (this)">
+                    <!--Para criar um novo usuário-->
+                    <div class="form-element">
+                        <p id="name">Nome completo: </p>
+                        <input type="text" name="txt_nome" id="txt_nome">
+                    </div>
+                    <div class="form-element">
+                        <p>Nome de usuário: </p>
+                        <input type="text" name="txt_login" id="txt_login">
+                    </div>
+                    <div class="form-element">
+                        <p>Bairro:</p>
+                        <input type="text" name="txt_bairro" id="txt_bairro">
+                    </div>
+                    <div class="form-element">
+                        <p>Rua:</p>
+                        <input type="text" name="txt_rua" id="txt_rua">
+                    </div>
+                    <div class="form-element">
+                        <p>Email:</p>
+                        <input type="text" name="txt_email" id="txt_email">
+                    </div>
+                    <div class="form-element">
+                        <p>Senha:</p>
+                        <input type="password" name="txt_senha" id="txt_senha">
+                    </div>
+                    <div class="form-element">
+                        <p>Confirmar senha:</p>
+                        <input type="password" name="txt_senha2" id="txt_senha2">
+                    </div>
+                    <div class="form-element">
+                        <button type="button" id="btn_salvar" class="btn btn-info">Finalizar Cadastro</button>
+                    </div>
+                </form>
+
+
+                <script src="../scripts/login.js"></script>
+
+
+                <script>
+                    var entrar = document.getElementById("login-form"); //função de login
+                    var cadastro = document.getElementById("registrar"); //função de criar novo usuário
+                    var botao = document.getElementById("btn"); //botão
+
+                    function registrar() { //aparecer as opções de login
+                        entrar.style.display = "none";
+                        cadastro.style.display = "block";
+                        botao.style.left = "110px";
+
+                    }
+
+
+
+                    function login() { //aparecer as opções de criação de usuário
+                        entrar.style.display = "block";
+                        cadastro.style.display = "none";
+                        botao.style.left = "0px";
+                    }
+
+                </script>
+
+                <script>
+
+                    // Declara uma função para processar o formulário de login
+                    function processaFormLogin(event) {
+                        // Cancela a submissão do formulário para tratar sem fazer refresh da tela
+                        event.preventDefault();
+
+                        // Obtem os dados de login e senha a partir do formulário de login
+                        var username = document.getElementById('username').value;
+                        var password = document.getElementById('password').value;
+
+                        // Valida login e se estiver ok, redireciona para tela inicial da aplicação
+                        resultadoLogin = loginUser(username, password);
+                        if (resultadoLogin) {
+                            window.location.href = 'dashboard.html';  //pagina de edição de infos do user
+                        }
+                        else { // Se login falhou, avisa ao usuário
+                            alert('Usuário ou senha incorretos');
+                        }
+                    }
+
+
+
+                    function salvaLogin(event) {
+                        // Cancela a submissão do formulário para tratar sem fazer refresh da tela
+                        event.preventDefault();
+
+                        // Obtem os dados do formulário
+                        let login = document.getElementById('txt_login').value;
+                        let nome = document.getElementById('txt_nome').value;
+                        let bairro = document.getElementById('txt_bairro').value;
+                        let rua = document.getElementById('txt_rua').value;
+                        let email = document.getElementById('txt_email').value;
+                        let senha = document.getElementById('txt_senha').value;
+                        let senha2 = document.getElementById('txt_senha2').value;
+
+                        if (senha != senha2) {
+                            alert('As senhas informadas não conferem.');
+                            return
+                        }
+
+                        // Adiciona o usuário no banco de dados
+                        addUser(nome, login, bairro, rua, email, senha);
+                        alert('Usuário cadastrado com sucesso. Insira seus dados na página de login. ');
+
+                        // Oculta a div modal do login
+                        //document.getElementById ('loginModal').style.display = 'none';
+                        $('#loginModal').modal('hide');
+                    }
+
+                    // Associa a funçao processaFormLogin  formulário adicionando um manipulador do evento submit
+                    document.getElementById('login-form').addEventListener('submit', processaFormLogin);
+
+
+                    // Associar salvamento ao botao
+                    document.getElementById('btn_salvar').addEventListener('click', salvaLogin);
+                </script>
+
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                    crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                    crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>

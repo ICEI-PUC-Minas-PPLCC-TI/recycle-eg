@@ -90,7 +90,13 @@ body
     padding: 5px;
     border-radius: 2px;
     border: none;
+    transition: all .2s;
 }
+#recycle_button:hover
+{
+    transform: scale(1.1, 1.1);
+}
+
 #recycle_button_1
 {
     background-color: #55A605;

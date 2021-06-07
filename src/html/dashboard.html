@@ -4,9 +4,19 @@
 <head>
     <title>Recycle.eg</title>
     <link rel="stylesheet" href="../styles/recycle_style.css">
+    <script src="../scripts/login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+
+    <script>
+        $(document).ready(function () {
+            console.log("ready !");
+            $(".username").html("Olá ".concat(usuarioCorrente.login));
+        });
+    </script>
+
     <header id="recycle_header">
         <a href="../../index.html"><img src="../img/logo.png" width="150"></a>
         <ul id="recycle_header_buttons">
@@ -19,8 +29,11 @@
         <div>
             <div id="recycle_container_person" style="display: block; margin: 10% auto;">
                 <img src="../img/placeholders/Profile_avatar_placeholder_large.png">
-                <h2 id="recycle_h2" class="recycle_text_centered">
-                    Usuário</h2>
+                <h2 id="recycle_h2" class="username recycle_text_centered">Usuário</h2>
+                <h1 id="recycle_h2" class="recycle_text_centered">100pts</h1>
+                <button id="recycle_button" style="display: block; margin: 0px auto;"
+                    onclick="location.href='historico.html'">Ver histórico de pontos</button>
+                <br>
                 <button id="recycle_button" style="display: block; margin: 0px auto;"
                     onclick="location.href='usuario_edit.html'">Editar</button>
             </div>

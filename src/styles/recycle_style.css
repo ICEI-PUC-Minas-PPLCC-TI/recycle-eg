@@ -394,7 +394,7 @@ body {
   }
   
   .file-upload-content {
-    display: none;
+    /* display: none; */
     text-align: center;
   }
   

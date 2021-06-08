@@ -281,7 +281,10 @@ function readURL(input) {
         $('.file-upload-content').show();
   
         $('.image-title').html(input.files[0].name);
-      };
+      
+        console.log("File buffer" + reader.result);
+        localStorage.setItem("profilePic", e.target.result);
+    };
   
       reader.readAsDataURL(input.files[0]);
   
@@ -289,4 +292,3 @@ function readURL(input) {
       removeUpload();
     }
   }
-  

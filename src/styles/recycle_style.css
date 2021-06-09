@@ -394,7 +394,7 @@ body {
   }
   
   .file-upload-content {
-    display: none;
+    /* display: none; */
     text-align: center;
   }
   
@@ -467,3 +467,7 @@ body {
     color: #ffffff;
     transition: all .2s ease;
     cursor: pointer;}
+    .file-upload{
+        width: 100% !important;
+        padding: 0;
+    }

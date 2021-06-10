@@ -26,6 +26,26 @@
         <h1 id="recycle_h1" class="data_user_fname">
             Usuário
         </h1>
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+
+ <!-- Upload de foto -->
+<div class="file-upload">
+  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+    <div class="drag-text">
+      <h3>Selecione uma imagem</h3>
+    </div>
+  </div>
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="#" alt="your image" />
+    <div class="image-title-wrap">
+    </div>
+  </div>
+</div>
+
         <!-- Documento original de: Milena Barreira -->
         <!-- Revisão: Pedro Pereira Lourenço -->
         <!-- Mudanças: id's trocada para os valores definidos dentro do arquivo de estilo recycle_style.css. 

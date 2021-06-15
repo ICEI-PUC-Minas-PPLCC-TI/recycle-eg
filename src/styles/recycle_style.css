@@ -38,6 +38,7 @@ body
     position: fixed;
     width: 100%;
     bottom: 0px;
+    padding: 10px;
 }
 
 #recycle_header ul
@@ -354,3 +355,60 @@ body
     font-size: 20px;
     margin-left: 65%;
 }
+
+/* History form style beginning */
+
+ span{
+     color: #55A605;
+     font-weight: 200;
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+  #coleta_numero, #coleta_bairro, #coleta_rua, #coleta_pontos {
+     background:none;
+     border: 1px #55A605 solid;
+     border-radius: 8px;
+     transition: 0.25s;
+
+ }
+
+ section{
+     margin-bottom:50px
+ }
+
+#history-form button{
+  
+        width: 150px;
+        padding: 2px 0 0 10px;
+        margin: 20px 0;
+        border-color: #55a605;
+        outline: none;
+        font-size: 16px;
+        background: rgb(255, 255, 255);
+        color: #55a605;
+        border-radius: 24px;
+        cursor: pointer;
+        display: flex;
+        transition: 0.25s;
+    
+ }
+
+ #history-form button:hover {
+    color: white;
+    background-color: #55a605;
+    border-color: white;
+}
+
+
+
+/*History form style end */
+
+/*local de coleta novo */
+
+#localColetaSalvo{
+    border-top: 1px #55a605 solid;
+    padding-bottom: 20px;
+}
+
+
+

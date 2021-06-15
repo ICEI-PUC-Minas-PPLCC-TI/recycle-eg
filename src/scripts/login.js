@@ -84,6 +84,7 @@ function loginUser(login, senha) {
             usuarioCorrente.nome = usuario.nome;
             usuarioCorrente.bairro = usuario.bairro;
             usuarioCorrente.rua = usuario.rua;
+            usuarioCorrente.coletas = usuario.coletas;
 
 
             // Salva os dados do usuário corrente no Session Storage, mas antes converte para string
@@ -105,11 +106,11 @@ function logoutUser() {
     window.location = LOGIN_URL;
 }
 
-function addUser(nome, login, bairro, rua, email, senha) {
+function addUser(nome, login, bairro, rua, email, senha, coletas) {
 
     // Cria um objeto de usuario para o novo usuario
     let newId = generateUUID();
-    let usuario = { "id": newId, "login": login, "senha": senha, "nome": nome, "email": email, "bairro": bairro, "rua": rua };
+    let usuario = { "id": newId, "login": login, "senha": senha, "nome": nome, "email": email, "bairro": bairro, "rua": rua, "coletas": coletas};
 
     // Inclui o novo usuario no banco de dados baseado em JSON
     db_usuarios.usuarios.push(usuario);

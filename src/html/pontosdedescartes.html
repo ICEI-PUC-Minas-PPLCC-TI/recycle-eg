@@ -44,26 +44,31 @@
 
             window.onload = () => {
 
-                let request = new XMLHttpRequest();
-                var queryAdress = "MG, Belo Horizonte, Rua".concat(usuarioCorrente.rua.concat("%20", usuarioCorrente.bairro));
-                var link = "https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(queryAdress.concat(".json?access_token=pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZnNhamIyM3N5MnBxcmZuMjU3N2RjIn0.JDtlDJT4jLfJeAArivUVMg"));
-
-                console.log("GET: ".concat(link));
-                request.open("GET", link);
-                request.send();
-
                 document.querySelector(".navigate").addEventListener("click", () => {
-                    if (request.readyState == 4 && request.status == 200) {
-                        var responseObj = JSON.parse(request.responseText);
-                        var relevant = getMustRelevantFeature(responseObj.features);
-                        map.flyTo({
-                            center: [
-                                relevant.center[0],
-                                relevant.center[1]
-                            ],
-                            zoom: 15,
-                            essential: true
-                        });
+
+
+                    let request = new XMLHttpRequest();
+                    var queryAdress = "MG, Belo Horizonte, Rua".concat(usuarioCorrente.rua.concat("%20", usuarioCorrente.bairro));
+                    var link = "https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(queryAdress.concat(".json?access_token=pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZnNhamIyM3N5MnBxcmZuMjU3N2RjIn0.JDtlDJT4jLfJeAArivUVMg"));
+
+                    console.log("GET: ".concat(link));
+                    request.open("GET", link);
+                    request.send();
+
+                    request.onreadystatechange = function (req) {
+
+                        if (req.readyState == 4 && req.status == 200) {
+                            var responseObj = JSON.parse(request.responseText);
+                            var relevant = getMustRelevantFeature(responseObj.features);
+                            map.flyTo({
+                                center: [
+                                    relevant.center[0],
+                                    relevant.center[1]
+                                ],
+                                zoom: 15,
+                                essential: true
+                            });
+                        }
                     }
                 });
 

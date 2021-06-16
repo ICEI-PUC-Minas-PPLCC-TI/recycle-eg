@@ -81,6 +81,7 @@ salvarDados = () => {
     let bairro = document.getElementById('coleta_bairro').value;
     let numero = document.getElementById('coleta_numero').value;
     let pontos = document.getElementById('coleta_pontos').value;
+    document.getElementById('centro_coleta_num').innerHTML = i + 2;
 
     if(rua == 0 || bairro == 0 || numero.value == 0 || pontos.value == 0) {
         alert('Campos obrigatórios em branco')
@@ -94,7 +95,8 @@ salvarDados = () => {
 
     console.log(usuarioCorrente)
    
-    usuarioCorrente.coletas[i] = [rua, bairro, numero, pontos];
+    let coleta = {"rua": rua, "bairro": bairro, "numero": numero, "pontos": pontos}
+    usuarioCorrente.coletas.push(coleta)
     sessionStorage.setItem("usuarioCorrente", JSON.stringify(usuarioCorrente));
     console.log(usuarioCorrente.coletas)
 
@@ -103,11 +105,11 @@ salvarDados = () => {
 
 ExibirColetas = () => {
     let k = 0
-    while(k <= i && i != 0) {
+    while(k < i && i != 0) {
         dados.innerHTML += (`
     <div id="localColetaSalvo">
-    <h2 id="recycle_h2">Centro de Coleta #${k + 1} - <span id="recycle_h1">${usuarioCorrente.coletas[k][2]}pts</span></h2>
-    <p id="recycle_p">Rua ${usuarioCorrente.coletas[k][0]} , bairro ${usuarioCorrente.coletas[k][1]}, nº ${usuarioCorrente.coletas[k][2]} </p>
+    <h2 id="recycle_h2">Centro de Coleta #${k + 1} - <span id="recycle_h1">${usuarioCorrente.coletas[k].pontos}pts</span></h2>
+    <p id="recycle_p">Rua ${usuarioCorrente.coletas[k].rua} , bairro ${usuarioCorrente.coletas[k].bairro}, nº ${usuarioCorrente.coletas[k].numero} </p>
     </div>`) 
     k++
     }  

@@ -84,6 +84,7 @@ function loginUser(login, senha) {
             usuarioCorrente.nome = usuario.nome;
             usuarioCorrente.bairro = usuario.bairro;
             usuarioCorrente.rua = usuario.rua;
+            usuarioCorrente.coletas = usuario.coletas;
 
 
             // Salva os dados do usuário corrente no Session Storage, mas antes converte para string
@@ -109,7 +110,7 @@ function addUser(nome, login, bairro, rua, email, senha) {
 
     // Cria um objeto de usuario para o novo usuario
     let newId = generateUUID();
-    let usuario = { "id": newId, "login": login, "senha": senha, "nome": nome, "email": email, "bairro": bairro, "rua": rua };
+    let usuario = { "id": newId, "login": login, "senha": senha, "nome": nome, "email": email, "bairro": bairro, "rua": rua, "coletas": [] };
 
     // Inclui o novo usuario no banco de dados baseado em JSON
     db_usuarios.usuarios.push(usuario);
@@ -120,6 +121,15 @@ function addUser(nome, login, bairro, rua, email, senha) {
 
 function setUserPass() {
 
+}
+
+function updateDB(user) {
+    db_usuarios.usuarios.forEach(element => {
+        if (element.id == user.id) {
+            element.coletas = user.coletas;
+            localStorage.setItem("db_usuarios", JSON.stringify(db_usuarios));
+        }
+    });
 }
 
 // Inicializa as estruturas utilizadas pelo LoginApp

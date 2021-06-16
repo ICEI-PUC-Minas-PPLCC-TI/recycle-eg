@@ -4,7 +4,7 @@
 <head>
     <title>Recycle.eg</title>
     <link rel="stylesheet" href="../styles/recycle_style.css">
-    
+
 </head>
 
 <body>
@@ -18,31 +18,32 @@
         </ul>
     </header>
     <section id="recycle_mainbody" style="margin-bottom: 150px;">
-        
-    <form id="history-form" class="history-form" method="post">
 
-        <div class="col-4" style="margin-top: 150px;">
-            <h1 id="recycle_h2">Seu histórico de pontos </h1>
-            <div class="form-element" id= 'localColetaBase'>
-                <h2 id="recycle_h2">Centro de Coleta #<span id="centro_coleta_num"></span> - <span id="recycle_h1"><input type="number" name="coleta_pontos" id="coleta_pontos">pts</span></h2>
-                <span>Rua: <input type="text" name="coleta_rua" id="coleta_rua"></span>
-                <span>Bairro: <input type="text" name="coleta_bairro" id="coleta_bairro"></span>   
-                <span>Número: <input type="number" name="coleta_numero" id="coleta_numero"></span>
-                <div class="form-element">
-                    <button type="button" id="btn_salvarAlteracoes">Salvar Alterações</button>
-                </div>   
+        <form id="history-form" class="history-form" method="post">
+
+            <div class="col-4" style="margin-top: 150px;">
+                <h1 id="recycle_h2">Seu histórico de pontos </h1>
+                <div class="form-element" id='localColetaBase'>
+                    <h2 id="recycle_h2">Centro de Coleta #<span id="centro_coleta_num"></span> - <span
+                            id="recycle_h1"><input type="number" name="coleta_pontos" id="coleta_pontos">pts</span></h2>
+                    <span>Rua: <input type="text" name="coleta_rua" id="coleta_rua"></span>
+                    <span>Bairro: <input type="text" name="coleta_bairro" id="coleta_bairro"></span>
+                    <span>Número: <input type="number" name="coleta_numero" id="coleta_numero"></span>
+                    <div class="form-element">
+                        <button type="button" id="btn_salvarAlteracoes">Salvar Alterações</button>
+                    </div>
+                </div>
+                <div class="form-element" id="localColetaNovo">
+
+
+                </div>
+
+
             </div>
-            <div class="form-element" id="localColetaNovo">
+
+        </form>
 
 
-            </div>
-           
-
-        </div>
-
-    </form>
-    
-       
 
     </section>
 
@@ -52,78 +53,73 @@
 
     <script>
 
-onload = () => {
-    document.getElementById('centro_coleta_num').innerHTML = i + 1;
-    ExibirColetas();
+        onload = () => {
+            document.getElementById('centro_coleta_num').innerHTML = i + 1;
+            ExibirColetas();
 
-    let botao = document.getElementById('btn_salvarAlteracoes')
-    botao.onclick = () => {
-        salvarDados();
-    }
-}
-
-
-var dados = document.getElementById('localColetaNovo')
-
-console.log(usuarioCorrente)
-console.log(usuarioCorrente.coletas)
-if(usuarioCorrente.coletas.length == undefined) {
-    usuarioCorrente.coletas.length = 0
-} 
-
-var i = usuarioCorrente.coletas.length;
+            let botao = document.getElementById('btn_salvarAlteracoes')
+            botao.onclick = () => {
+                salvarDados();
+            }
+        }
 
 
+        var dados = document.getElementById('localColetaNovo')
 
-salvarDados = () => {
+        console.log(usuarioCorrente)
+        console.log(usuarioCorrente.coletas)
+        if (usuarioCorrente.coletas.length == undefined) {
+            usuarioCorrente.coletas.length = 0
+        }
 
-    let rua = document.getElementById('coleta_rua').value;
-    let bairro = document.getElementById('coleta_bairro').value;
-    let numero = document.getElementById('coleta_numero').value;
-    let pontos = document.getElementById('coleta_pontos').value;
-    document.getElementById('centro_coleta_num').innerHTML = i + 2;
+        var i = usuarioCorrente.coletas.length;
 
-    if(rua == 0 || bairro == 0 || numero.value == 0 || pontos.value == 0) {
-        alert('Campos obrigatórios em branco')
-        return;
-    }
-    dados.innerHTML += (`
+
+
+        salvarDados = () => {
+
+            let rua = document.getElementById('coleta_rua').value;
+            let bairro = document.getElementById('coleta_bairro').value;
+            let numero = document.getElementById('coleta_numero').value;
+            let pontos = document.getElementById('coleta_pontos').value;
+            document.getElementById('centro_coleta_num').innerHTML = i + 2;
+
+            if (rua == 0 || bairro == 0 || numero.value == 0 || pontos.value == 0) {
+                alert('Campos obrigatórios em branco')
+                return;
+            }
+            dados.innerHTML += (`
     <div id="localColetaSalvo">
     <h2 id="recycle_h2">Centro de Coleta #${i + 1} - <span id="recycle_h1">${pontos}pts</span></h2>
     <p id="recycle_p">Rua ${rua} , bairro ${bairro}, nº ${numero} </p>
-    </div>`)  
+    </div>`)
 
-    console.log(usuarioCorrente)
-   
-    let coleta = {"rua": rua, "bairro": bairro, "numero": numero, "pontos": pontos}
-    usuarioCorrente.coletas.push(coleta)
-    sessionStorage.setItem("usuarioCorrente", JSON.stringify(usuarioCorrente));
-    console.log(usuarioCorrente.coletas)
+            console.log(usuarioCorrente)
 
-    i++; 
-}
+            let coleta = { "rua": rua, "bairro": bairro, "numero": numero, "pontos": pontos }
+            usuarioCorrente.coletas.push(coleta)
+            sessionStorage.setItem("usuarioCorrente", JSON.stringify(usuarioCorrente));
+            console.log(usuarioCorrente.coletas)
 
-ExibirColetas = () => {
-    let k = 0
-    while(k < i && i != 0) {
-        dados.innerHTML += (`
+            updateDB(usuarioCorrente);
+
+            i++;
+        }
+
+        ExibirColetas = () => {
+            let k = 0
+            while (k < i && i != 0) {
+                dados.innerHTML += (`
     <div id="localColetaSalvo">
     <h2 id="recycle_h2">Centro de Coleta #${k + 1} - <span id="recycle_h1">${usuarioCorrente.coletas[k].pontos}pts</span></h2>
     <p id="recycle_p">Rua ${usuarioCorrente.coletas[k].rua} , bairro ${usuarioCorrente.coletas[k].bairro}, nº ${usuarioCorrente.coletas[k].numero} </p>
-    </div>`) 
-    k++
-    }  
-} 
+    </div>`)
+                k++
+            }
+        }
 
     </script>
 </body>
 
 
 </html>
-            
-
-            
-
-            
-
-            

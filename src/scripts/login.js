@@ -123,6 +123,15 @@ function setUserPass() {
 
 }
 
+function updateDB(user) {
+    db_usuarios.usuarios.forEach(element => {
+        if (element.id == user.id) {
+            element.coletas = user.coletas;
+            localStorage.setItem("db_usuarios", JSON.stringify(db_usuarios));
+        }
+    });
+}
+
 // Inicializa as estruturas utilizadas pelo LoginApp
 initLoginApp();
 

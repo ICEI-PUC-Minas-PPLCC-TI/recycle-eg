@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<!-- sk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZzVuNGYwaGxxMnFsajhnc3YycHhpIn0.VaUblCSqBXA1MFytzAiHyg -->
 
 <head>
     <title>Recycle.eg</title>
@@ -13,6 +14,11 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <script src='../scripts/mapbox.js'></script>
+    <script src='../scripts/login.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
@@ -25,7 +31,47 @@
     </header>
     <section id="recycle_mainbody">
         <h2 id="recycle_h2">Meu Mapa</h2>
-        <div id="map" class="map"></div>
+        <div id='map' style='width: 100%; height: 400px;'></div>
+        <button id="recycle_button" class="navigate">Localização atual</button>
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZnNhamIyM3N5MnBxcmZuMjU3N2RjIn0.JDtlDJT4jLfJeAArivUVMg';
+
+            // mapboxgl.accessToken = 'sk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZzVuNGYwaGxxMnFsajhnc3YycHhpIn0.VaUblCSqBXA1MFytzAiHyg';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11'
+            });
+
+            window.onload = () => {
+
+                let request = new XMLHttpRequest();
+                var queryAdress = "MG, Belo Horizonte, Rua".concat(usuarioCorrente.rua.concat("%20", usuarioCorrente.bairro));
+                var link = "https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(queryAdress.concat(".json?access_token=pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZnNhamIyM3N5MnBxcmZuMjU3N2RjIn0.JDtlDJT4jLfJeAArivUVMg"));
+
+                console.log("GET: ".concat(link));
+                request.open("GET", link);
+                request.send();
+
+                document.querySelector(".navigate").addEventListener("click", () => {
+                    if (request.readyState == 4 && request.status == 200) {
+                        var responseObj = JSON.parse(request.responseText);
+                        var relevant = getMustRelevantFeature(responseObj.features);
+                        map.flyTo({
+                            center: [
+                                relevant.center[0],
+                                relevant.center[1]
+                            ],
+                            zoom: 15,
+                            essential: true
+                        });
+                    }
+                });
+
+                request.onreadystatechange = function () {
+                };
+            }
+        </script>
+        <!-- <div id="map" class="map"></div>
         <script type="text/javascript">
             var map = new ol.Map({
                 target: 'map',
@@ -39,7 +85,7 @@
                     zoom: 13
                 })
             });
-        </script>
+        </script> -->
     </section>
     <footer id="recycle_footer">
         <p style="font-family: Arial, Helvetica, sans-serif; color: white; font-size: 12px;">All rights reserved</p>

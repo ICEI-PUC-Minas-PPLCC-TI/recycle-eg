@@ -131,6 +131,7 @@
                         let email = document.getElementById('txt_email').value;
                         let senha = document.getElementById('txt_senha').value;
                         let senha2 = document.getElementById('txt_senha2').value;
+                        let coletas = [];
 
                         if (senha != senha2) {
                             alert('As senhas informadas não conferem.');
@@ -138,7 +139,7 @@
                         }
 
                         // Adiciona o usuário no banco de dados
-                        addUser(nome, login, bairro, rua, email, senha);
+                        addUser(nome, login, bairro, rua, email, senha, coletas);
                         alert('Usuário cadastrado com sucesso. Insira seus dados na página de login. ');
 
                         // Oculta a div modal do login

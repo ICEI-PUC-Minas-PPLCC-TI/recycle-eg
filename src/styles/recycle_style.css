@@ -23,6 +23,12 @@ body
     text-decoration: none;
 }
 
+#recycle_container_person a
+{
+    color: #55A605;
+    text-decoration: none;
+}
+
 #recycle_mainbody
 {
     display: block;

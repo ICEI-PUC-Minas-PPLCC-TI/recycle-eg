@@ -1,9 +1,10 @@
 body
-{
-    background-color: #F2F2F2;
+{ /* #0d1117 */
+    background-color: #FAFAFA;
     margin-top: 0px;
     margin-left: 0px;
     margin-right: 0px;
+    transition: 0.25;
 }
 
 /* Recycle.eg principais estilos */
@@ -20,6 +21,22 @@ body
     display: inline-flex;
     margin-right: 10px;
     color: #F2F2F2;
+    text-decoration: none;
+}
+
+#recycle_header #moon {
+    color: #FAFAFA;
+    transition:0.25;
+}
+
+#recycle_header #moon:hover {
+    color: #0d1117;
+    transition:0.25;
+}
+
+#recycle_container_person a
+{
+    color: #55A605;
     text-decoration: none;
 }
 
@@ -55,6 +72,7 @@ body
     margin-right: 10px;
     color: #F2F2F2;
     font-family: Arial, Helvetica, sans-serif;
+    transition: 0.25s
 }
 
 #recycle_header ul li:hover
@@ -398,6 +416,7 @@ body
     background-color: #55a605;
     border-color: white;
 }
+
 
 
 

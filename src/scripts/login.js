@@ -110,8 +110,7 @@ function addUser(nome, login, bairro, rua, email, senha) {
 
     // Cria um objeto de usuario para o novo usuario
     let newId = generateUUID();
-    let usuario = { "id": newId, "login": login, "senha": senha, "nome": nome, "email": email, "bairro": bairro, "rua": rua, "coletas": [] };
-
+    let usuario = { "id": newId, "login": login, "senha": senha, "nome": nome, "email": email, "bairro": bairro, "rua": rua, coletas: [] };
     // Inclui o novo usuario no banco de dados baseado em JSON
     db_usuarios.usuarios.push(usuario);
 

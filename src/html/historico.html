@@ -7,43 +7,153 @@
 </head>
 
 <body>
+    <script src="../scripts/login.js"></script>
+
     <header id="recycle_header">
         <a href="../../index.html"><img src="../img/logo.png" width="150"></a>
         <ul id="recycle_header_buttons">
             <li><a href="pontosdedescartes.html">Ponto de descarte</a></li>
-            <li>Perfil</li>
+            <li> <a href="../html/login.html">Perfil</a></li>
+            <li id="moon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars-fill" viewBox="0 0 16 16">
+                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+              </svg></li>
         </ul>
     </header>
-    <section id="recycle_mainbody">
+    <section id="recycle_mainbody" style="margin-bottom: 150px;">
 
-        <div class="col-4" style="margin-top: 150px;">
-            <h1 id="recycle_h2">Seu histórico de pontos</h1>
-            <div class="grid_cor1">
-                <h2 id="recycle_h2">Centro de Coleta #1<span id="recycle_h1">30pts</span></h2>
-                <p id="recycle_p">Rua xxx, bairro xxx, nº 231 </p>
+        <form id="history-form" class="history-form" method="post">
+
+            <div class="col-4" style="margin-top: 150px;">
+                <h1 id="recycle_h2">Seu histórico de pontos </h1>
+                <div class="form-element" id='localColetaBase'>
+                    <h2 id="recycle_h2">Centro de Coleta #<span id="centro_coleta_num"></span> - <span
+                            id="recycle_h1"><input type="number" name="coleta_pontos" id="coleta_pontos">pts</span></h2>
+                    <span>Rua: <input type="text" name="coleta_rua" id="coleta_rua"></span>
+                    <span>Bairro: <input type="text" name="coleta_bairro" id="coleta_bairro"></span>
+                    <span>Número: <input type="number" name="coleta_numero" id="coleta_numero"></span>
+                    <div class="form-element">
+                        <button type="button" id="btn_salvarAlteracoes">Salvar Alterações</button>
+                    </div>
+                </div>
+                <div class="form-element" id="localColetaNovo">
+
+
+                </div>
+
+
             </div>
 
-            <div class="grid_cor1">
-                <h2 id="recycle_h2">Centro de Coleta #2<span id="recycle_h1">25pts</span></h2>
-                <p id="recycle_p">Rua xxx, bairro xxx, nº 231 </p>
-            </div>
+        </form>
 
-            <div class="grid_cor1">
-                <h2 id="recycle_h2">Centro de Coleta #3<span id="recycle_h1">10pts</span></h2>
-                <p id="recycle_p">Rua xxx, bairro xxx, nº 231 </p>
-            </div>
 
-            <div class="grid_cor1">
-                <h2 id="recycle_h2">Centro de Coleta #4<span id="recycle_h1">100pts</span></h2>
-                <p id="recycle_p">Rua xxx, bairro xxx, nº 231 </p>
-            </div>
-
-        </div>
 
     </section>
+
     <footer id="recycle_footer">
         <p style="font-family: Arial, Helvetica, sans-serif; color: white; font-size: 12px;">All rights reserved</p>
     </footer>
+
+    <script>
+
+        onload = () => {
+            document.getElementById('centro_coleta_num').innerHTML = i + 1;
+            ExibirColetas();
+
+            let botao = document.getElementById('btn_salvarAlteracoes')
+            botao.onclick = () => {
+                salvarDados();
+            }
+
+            //modo noturno
+
+            var mode = "bright"
+                button = document.getElementById('moon')
+                button.onclick = () => {
+                    if(mode === "bright") {
+                    document.querySelector('body').style.backgroundColor = '#0d1117'
+                    document.querySelector('body').style.color = 'white'
+                    document.querySelector('button').style.backgroundColor = '#0d1117'
+                    document.getElementById('coleta_rua').style.color = 'white'
+                    document.getElementById('coleta_bairro').style.color = 'white'
+                    document.getElementById('coleta_numero').style.color = 'white'
+                    document.getElementById('coleta_pontos').style.color = 'white'
+
+                    mode = "dark"
+                    } else {
+                    document.querySelector('body').style.backgroundColor = '#FAFAFA'
+                    document.querySelector('body').style.color = 'black'
+                    document.querySelector('button').style.backgroundColor = '#FAFAFA'
+                    document.getElementById('coleta_rua').style.color = 'black'
+                    document.getElementById('coleta_bairro').style.color = 'black'
+                    document.getElementById('coleta_numero').style.color = 'black'
+                    document.getElementById('coleta_pontos').style.color = 'black'            
+                        
+                    mode = "bright"
+
+                    }//fim modo noturno
+            
+            }
+        }
+
+
+        var dados = document.getElementById('localColetaNovo')
+
+        console.log(usuarioCorrente)
+        console.log(usuarioCorrente.coletas)
+        if (usuarioCorrente.coletas.length == undefined) {
+            usuarioCorrente.coletas.length = 0
+        }
+
+        var i = usuarioCorrente.coletas.length;
+
+
+
+        salvarDados = () => {
+
+            let rua = document.getElementById('coleta_rua').value;
+            let bairro = document.getElementById('coleta_bairro').value;
+            let numero = document.getElementById('coleta_numero').value;
+            let pontos = document.getElementById('coleta_pontos').value;
+            document.getElementById('centro_coleta_num').innerHTML = i + 2;
+
+            if (rua == 0 || bairro == 0 || numero.value == 0 || pontos.value == 0) {
+                alert('Campos obrigatórios em branco')
+                return;
+            }
+            dados.innerHTML += (`
+    <div id="localColetaSalvo">
+    <h2 id="recycle_h2">Centro de Coleta #${i + 1} - <span id="recycle_h1">${pontos}pts</span></h2>
+    <p id="recycle_p">Rua ${rua} , bairro ${bairro}, nº ${numero} </p>
+    </div>`)
+
+            console.log(usuarioCorrente)
+
+            let coleta = { "rua": rua, "bairro": bairro, "numero": numero, "pontos": pontos }
+            usuarioCorrente.coletas.push(coleta)
+            sessionStorage.setItem("usuarioCorrente", JSON.stringify(usuarioCorrente));
+            console.log(usuarioCorrente.coletas)
+
+            updateDB(usuarioCorrente);
+
+            i++;
+        }
+
+        ExibirColetas = () => {
+            let k = 0
+            while (k < i && i != 0) {
+                dados.innerHTML += (`
+    <div id="localColetaSalvo">
+    <h2 id="recycle_h2">Centro de Coleta #${k + 1} - <span id="recycle_h1">${usuarioCorrente.coletas[k].pontos}pts</span></h2>
+    <p id="recycle_p">Rua ${usuarioCorrente.coletas[k].rua} , bairro ${usuarioCorrente.coletas[k].bairro}, nº ${usuarioCorrente.coletas[k].numero} </p>
+    </div>`)
+                k++
+            }
+        }
+
+    </script>
+
 </body>
+
 
 </html>

@@ -1,9 +1,10 @@
 body
-{
-    background-color: #F2F2F2;
+{ /* #0d1117 */
+    background-color: #FAFAFA;
     margin-top: 0px;
     margin-left: 0px;
     margin-right: 0px;
+    transition: 0.25;
 }
 
 /* Recycle.eg principais estilos */
@@ -23,6 +24,22 @@ body
     text-decoration: none;
 }
 
+#recycle_header #moon {
+    color: #FAFAFA;
+    transition:0.25;
+}
+
+#recycle_header #moon:hover {
+    color: #0d1117;
+    transition:0.25;
+}
+
+#recycle_container_person a
+{
+    color: #55A605;
+    text-decoration: none;
+}
+
 #recycle_mainbody
 {
     display: block;
@@ -38,6 +55,7 @@ body
     position: fixed;
     width: 100%;
     bottom: 0px;
+    padding: 10px;
 }
 
 #recycle_header ul
@@ -54,6 +72,7 @@ body
     margin-right: 10px;
     color: #F2F2F2;
     font-family: Arial, Helvetica, sans-serif;
+    transition: 0.25s
 }
 
 #recycle_header ul li:hover
@@ -354,12 +373,64 @@ body
     font-size: 20px;
     margin-left: 65%;
 }
-body {
-    font-family: sans-serif;
-    background-color: #F2F2F2;
-  }
+
+/* History form style beginning */
+
+ span{
+     color: #55A605;
+     font-weight: 200;
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+  #coleta_numero, #coleta_bairro, #coleta_rua, #coleta_pontos {
+     background:none;
+     border: 1px #55A605 solid;
+     border-radius: 8px;
+     transition: 0.25s;
+
+ }
+
+ section{
+     margin-bottom:50px
+ }
+
+#history-form button{
   
-  .file-upload {
+        width: 150px;
+        padding: 2px 0 0 10px;
+        margin: 20px 0;
+        border-color: #55a605;
+        outline: none;
+        font-size: 16px;
+        background: rgb(255, 255, 255);
+        color: #55a605;
+        border-radius: 24px;
+        cursor: pointer;
+        display: flex;
+        transition: 0.25s;
+    
+ }
+
+ #history-form button:hover {
+    color: white;
+    background-color: #55a605;
+    border-color: white;
+}
+
+
+
+
+/*History form style end */
+
+/*local de coleta novo */
+
+#localColetaSalvo{
+    border-top: 1px #55a605 solid;
+    padding-bottom: 20px;
+}
+
+
+.file-upload {
     background-color: #F2F2F2;
     width: 600px;
     margin: 0 auto;

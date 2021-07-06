@@ -4,12 +4,12 @@
 <head>
     <title>Recycle.eg</title>
     <link rel="stylesheet" href="../styles/recycle_style.css">
-   
+
 </head>
 
 <body>
-  
-  
+
+
     <header id="recycle_header">
 
         <!-- scripts -->
@@ -26,25 +26,27 @@
         <h1 id="recycle_h1" class="data_user_fname">
             Usuário
         </h1>
-<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
 
- <!-- Upload de foto -->
-<div class="file-upload">
-  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+        <!-- Upload de foto -->
+        <div class="file-upload">
+            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add
+                Image</button>
 
-  <div class="image-upload-wrap">
-    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-    <div class="drag-text">
-      <h3>Selecione uma imagem</h3>
-    </div>
-  </div>
-  <div class="file-upload-content">
-    <img class="file-upload-image" src="#" alt="your image" />
-    <div class="image-title-wrap">
-    </div>
-  </div>
-</div>
+            <div class="image-upload-wrap">
+                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                <div class="drag-text">
+                    <h3>Selecione uma imagem</h3>
+                </div>
+            </div>
+            <div class="file-upload-content">
+                <img class="file-upload-image" src="#" alt="your image" />
+                <div class="image-title-wrap">
+                </div>
+            </div>
+        </div>
+
 
         <!-- Documento original de: Milena Barreira -->
         <!-- Revisão: Pedro Pereira Lourenço -->
@@ -53,10 +55,10 @@
             por Milena Barreia. Alteração do script: parte.js para user_info.js, alterando os nomes das funções e adptando para
             jquery -->
         <form id="login-form">
-            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Nome</h2>
+            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Nome Completo</h2>
             <input id="recycle_nome" class="nome" placeholder="Nome" required="" value="">
-            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Sobrenome</h2>
-            <input id="recycle_sobrenome" class="input_data_user_lname" placeholder="sobrenome" required="" value="">
+            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Login</h2>
+            <input id="recycle_sobrenome" class="login" placeholder="sobrenome" required="" value="">
             <!-- <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Sexo</h2> -->
             <!-- <select id="recylce_select_fat" name="select">
                 <option value="1">Masculino</option>
@@ -79,79 +81,77 @@
                 <li>
                     <p id="recycle_p" style="padding-right: 10px; width: 50px;">Estado</p>
                     <input id="recycle_input_normal" class="input_data_user_state" placeholder="estado" required=""
-                        value="Minas Gerais" >
+                        value="Minas Gerais">
                 </li>
                 <li>
                     <p id="recycle_p" style="padding-right: 10px; width: 50px;">Rua</p>
-                    <input id="recycle_input_normal" class="input_data_user_strt" placeholder="rua" required="" value=""
-                        >
+                    <input id="recycle_input_normal" class="input_data_user_strt" placeholder="rua" required=""
+                        value="">
                 </li>
                 <li>
                     <p id="recycle_p" style="padding-right: 10px; width: 50px;">Bairro</p>
                     <input id="recycle_input_normal" class="input_data_user_dtrct" placeholder="bairro" required=""
-                        value="" >
+                        value="">
                 </li>
             </ul>
-            <button id="recycle_button" class="submit" style="height: 50px; width: 100px;">Confirmar</button>            <button id="recycle_button_red" class="cancel" onclick="location.href='dashboard.html'; return false"
+            <button id="recycle_button" class="submit" style="height: 50px; width: 100px;">Confirmar</button> <button
+                id="recycle_button_red" class="cancel" onclick="location.href='dashboard.html'; return false"
                 style="height: 50px; width: 100px;">Cancelar</button>
         </form>
     </section>
     <footer id="recycle_footer">
         <p style="font-family: Arial, Helvetica, sans-serif; color: white; font-size: 12px;">All rights reserved</p>
     </footer>
-    
-   
+
+
 
     </script>
 
     <script>
-$(".nome").val(usuarioCorrente.nome);
-$(".input_data_user_email").val(usuarioCorrente.email);
-$(".input_data_user_strt").val(usuarioCorrente.rua);
-$(".input_data_user_dtrct").val(usuarioCorrente.bairro);
-var nomes = usuarioCorrente.nome.split(" ");
+        $(".nome").val(usuarioCorrente.nome);
+        $(".login").val(usuarioCorrente.login);
+        $(".input_data_user_email").val(usuarioCorrente.email);
+        $(".input_data_user_strt").val(usuarioCorrente.rua);
+        $(".input_data_user_dtrct").val(usuarioCorrente.bairro);
+        var nomes = usuarioCorrente.nome.split(" ");
 
-console.log(nomes);
+        console.log(nomes);
 
-var sobrenome = nomes[nomes.length - 1];
 
-console.log(sobrenome);
-
-$(".input_data_user_lname").val(sobrenome);
-$(".submit").bind("click", onClick);
-function onClick(){
-    db_usuarios.usuarios.forEach(element => {
-        if(element.id == usuarioCorrente.id){
-            element.nome = $(".nome").val();
-            element.login = $(".nome").val();
-            element.email = $(".input_data_user_email").val();
-            element.rua = $(".input_data_user_strt").val();
-            element.bairro = $(".input_data_user_dtrct").val();
-            localStorage.setItem("db_usuarios", JSON.stringify(db_usuarios));
-            $(".nome").val(element.nome);
-            $(".input_data_user_email").val(element.email);
-            $(".input_data_user_strt").val(element.rua);
-            $(".input_data_user_dtrct").val(element.bairro);
-            var nomes = element.nome.split(" ");
-            var sobrenome = nomes[nomes.length - 1];
-            $(".input_data_user_lname").val(sobrenome);
-            usuarioCorrente = element;
-            sessionStorage.setItem("usuarioCorrente", JSON.stringify(element));
+        $(".submit").bind("click", onClick);
+        function onClick() {
+            db_usuarios.usuarios.forEach(element => {
+                if (element.id == usuarioCorrente.id) {
+                    element.nome = $(".nome").val();
+                    element.login = $(".login").val();
+                    element.email = $(".input_data_user_email").val();
+                    element.rua = $(".input_data_user_strt").val();
+                    element.bairro = $(".input_data_user_dtrct").val();
+                    localStorage.setItem("db_usuarios", JSON.stringify(db_usuarios));
+                    $(".nome").val(element.nome);
+                    $(".login").val(element.login);
+                    $(".input_data_user_email").val(element.email);
+                    $(".input_data_user_strt").val(element.rua);
+                    $(".input_data_user_dtrct").val(element.bairro);
+                    var nomes = element.nome.split(" ");
+                    usuarioCorrente = element;
+                    sessionStorage.setItem("usuarioCorrente", JSON.stringify(element));
+                }
+                console.log(element)
+            });
+            console.log(usuarioCorrente.nome);
+            console.log(usuarioCorrente.login);
+            console.log(usuarioCorrente.email);
+            console.log(usuarioCorrente.rua);
+            console.log(usuarioCorrente.bairro);
         }
-        console.log(element)
-    });
-    console.log(usuarioCorrente.nome);
-    console.log(usuarioCorrente.email);
-    console.log(usuarioCorrente.rua);
-    console.log(usuarioCorrente.bairro);
-}
 
 
 
 
         // Declara uma função para processar o formulário de login
          // Declara uma função para processar o formulário de login
-        
+
        // function processaFormLogin(event) {
             // Cancela a submissão do formulário para tratar sem fazer refresh da tela
           //  event.preventDefault();
@@ -162,7 +162,7 @@ function onClick(){
 
             // Valida login e se estiver ok, redireciona para tela inicial da aplicação
            // resultadoLogin = loginUser(username, password);
-            
+
         //}
 
 
@@ -186,13 +186,13 @@ function onClick(){
             //document.getElementById ('loginModal').style.display = 'none';
         //    $('#loginModal').modal('hide');
        // }
-      
 
-   
-   
-   
-   
-   </script>
+
+
+
+
+
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

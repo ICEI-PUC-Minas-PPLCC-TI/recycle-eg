@@ -53,10 +53,10 @@
             por Milena Barreia. Alteração do script: parte.js para user_info.js, alterando os nomes das funções e adptando para
             jquery -->
         <form id="login-form">
-            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Nome</h2>
+            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Nome Completo</h2>
             <input id="recycle_nome" class="nome" placeholder="Nome" required="" value="">
-            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Sobrenome</h2>
-            <input id="recycle_sobrenome" class="input_data_user_lname" placeholder="sobrenome" required="" value="">
+            <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Login</h2>
+            <input id="recycle_sobrenome" class="login" placeholder="sobrenome" required="" value="">
             <!-- <h2 id="recycle_h2" style="width: 100px; padding-right: 50px;">Sexo</h2> -->
             <!-- <select id="recylce_select_fat" name="select">
                 <option value="1">Masculino</option>
@@ -106,6 +106,7 @@
 
     <script>
 $(".nome").val(usuarioCorrente.nome);
+$(".login").val(usuarioCorrente.login);
 $(".input_data_user_email").val(usuarioCorrente.email);
 $(".input_data_user_strt").val(usuarioCorrente.rua);
 $(".input_data_user_dtrct").val(usuarioCorrente.bairro);
@@ -113,34 +114,30 @@ var nomes = usuarioCorrente.nome.split(" ");
 
 console.log(nomes);
 
-var sobrenome = nomes[nomes.length - 1];
 
-console.log(sobrenome);
-
-$(".input_data_user_lname").val(sobrenome);
 $(".submit").bind("click", onClick);
 function onClick(){
     db_usuarios.usuarios.forEach(element => {
         if(element.id == usuarioCorrente.id){
             element.nome = $(".nome").val();
-            element.login = $(".nome").val();
+            element.login = $(".login").val();
             element.email = $(".input_data_user_email").val();
             element.rua = $(".input_data_user_strt").val();
             element.bairro = $(".input_data_user_dtrct").val();
             localStorage.setItem("db_usuarios", JSON.stringify(db_usuarios));
             $(".nome").val(element.nome);
+            $(".login").val(element.login);
             $(".input_data_user_email").val(element.email);
             $(".input_data_user_strt").val(element.rua);
             $(".input_data_user_dtrct").val(element.bairro);
             var nomes = element.nome.split(" ");
-            var sobrenome = nomes[nomes.length - 1];
-            $(".input_data_user_lname").val(sobrenome);
             usuarioCorrente = element;
             sessionStorage.setItem("usuarioCorrente", JSON.stringify(element));
         }
         console.log(element)
     });
     console.log(usuarioCorrente.nome);
+    console.log(usuarioCorrente.login);
     console.log(usuarioCorrente.email);
     console.log(usuarioCorrente.rua);
     console.log(usuarioCorrente.bairro);

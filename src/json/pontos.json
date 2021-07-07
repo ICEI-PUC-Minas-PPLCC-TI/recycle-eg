@@ -1,0 +1,67 @@
+{
+    "pontos": [
+        {
+            "empresa": "Emile Descarte",
+            "nome": "Litium",
+            "rua": "Rua Padre Eustaquio",
+            "numero": 443,
+            "bairro": "Carlos Prates"
+        },
+        {
+            "empresa": "Emile Descarte",
+            "nome": "Centro de educacao ambiental do prog Pampula",
+            "rua": "Rua Radialista Ubaldo Ferreira",
+            "numero": 20,
+            "bairro": "Castelo"
+        },
+        {
+            "empresa": "Emile Descarte",
+            "nome": "AMITECNO",
+            "rua": "Rua da Bahia",
+            "numero": 1148,
+            "bairro": "Centro"
+        },
+        {
+            "empresa": "Emile Descarte",
+            "nome": "Santa Maria Cidade Nova",
+            "rua": "Rua Professor Costa Chiabi",
+            "numero": 15,
+            "bairro": "Cidade Nova"
+        },
+        {
+            "empresa": "Emile Descarte",
+            "nome": "Santa Maria Coracao Eucaristico",
+            "rua": "Rua Itutinga",
+            "numero": "240",
+            "bairro": "Coracao Eucaristico"
+        },
+        {
+            "empresa": "Emile Descarte",
+            "nome": "Certmidia",
+            "rua": "Rua Padre Marinho",
+            "numero": -1,
+            "bairro": "Santa Efigenia"
+        },
+        {
+            "empresa": "Emile Descarte",
+            "nome": "Hemar Ltda",
+            "rua": "Rua Oscar Castanheira",
+            "numero": 112,
+            "bairro": "Dona Clara"
+        },
+        {
+            "empresa": "Emile Descarte",
+            "nome": "BH-TEX Parque Ecologico",
+            "rua": "Rua Professor Jose Vieira",
+            "numero": 770,
+            "bairro": "Engenheiro Nogueira"
+        },
+        {
+            "empresa": "Emile Descarte",
+            "nome": "Santa Maria Floresta",
+            "rua": "Rua Jacuí",
+            "numero": 237,
+            "bairro": "Floresta"
+        }
+    ]
+}

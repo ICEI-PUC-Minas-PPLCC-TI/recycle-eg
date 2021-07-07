@@ -19,6 +19,7 @@
     <script src='../scripts/mapbox.js'></script>
     <script src='../scripts/login.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -33,8 +34,14 @@
         <h2 id="recycle_h2">Meu Mapa</h2>
         <div id='map' style='width: 100%; height: 400px;'></div>
         <button id="recycle_button" class="navigate">Localização atual</button>
+        <h2 id="recycle_h2">Todos os pontos</h2>
+        <div id="pontos">
+
+            <!-- <button id="recycle_button" class="navigate" onclick="">Localização atual</button> -->
+        </div>
+
         <script>
-            mapboxgl.accessToken = 'pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZnNhamIyM3N5MnBxcmZuMjU3N2RjIn0.JDtlDJT4jLfJeAArivUVMg';
+            mapboxgl.accessToken = 'pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3FzM2kwbXEwZjhlMnlucWNqNGlrZnA4In0.S3q2ZsniJgnWxpz9LN9LGQ';
 
             // mapboxgl.accessToken = 'sk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZzVuNGYwaGxxMnFsajhnc3YycHhpIn0.VaUblCSqBXA1MFytzAiHyg';
             var map = new mapboxgl.Map({
@@ -42,38 +49,119 @@
                 style: 'mapbox://styles/mapbox/streets-v11'
             });
 
+
+            let request = new XMLHttpRequest();
+            var currentMarker = null;
+
             window.onload = () => {
+
+                var file;
+
+                $.getJSON("../json/pontos.json", (json) => {
+                    json.pontos.forEach(ponto => {
+                        var append = $("#pontos").html();
+                        var button = '<button id="recycle_button" class="" style="margin: 2px">' + ponto.nome + '</button>';
+                        button = button.replace('class=""', 'class="ponto_' + ponto.nome.replaceAll(' ', '').replaceAll('.', '') + '"');
+                        $("#pontos").append(button);
+                        $('.ponto_' + ponto.nome.replaceAll(' ', '').replaceAll('.', '')).on('click', () => {
+                            var adress = ponto.rua.replaceAll(" ", "%20");
+                            adress += "%20" + ponto.bairro.replaceAll(" ", "%20");
+                            console.log(adress);
+
+
+                            console.log("Flying to: " + adress);
+                            // var link = "https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(adress.concat(".json?access_token=pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZnNhamIyM3N5MnBxcmZuMjU3N2RjIn0.JDtlDJT4jLfJeAArivUVMg"));
+                            var link = "https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(adress.concat(".json?access_token=pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3FzM2kwbXEwZjhlMnlucWNqNGlrZnA4In0.S3q2ZsniJgnWxpz9LN9LGQ"));
+
+                            console.log("GET: ".concat(link));
+                            request = new XMLHttpRequest();
+                            request.onreadystatechange = function () {
+
+                                if (request.status == 200) {
+                                    var responseObj = JSON.parse(request.responseText);
+                                    var relevant = getMustRelevantFeature(responseObj.features);
+                                    console.log("fly !");
+
+                                    if (currentMarker != null) {
+                                        currentMarker.remove();
+                                    }
+
+                                    currentMarker = new mapboxgl.Marker().setLngLat(relevant.center).addTo(map);
+
+                                    map.flyTo({
+                                        center: [
+                                            relevant.center[0],
+                                            relevant.center[1]
+                                        ],
+                                        zoom: 15,
+                                    });
+                                }
+                            }
+                            request.open("GET", link);
+                            request.send();
+                        });
+                    });
+                });
 
                 document.querySelector(".navigate").addEventListener("click", () => {
 
+                    var adress = usuarioCorrente.rua.replaceAll(" ", "%20");
+                    adress += "%20" + usuarioCorrente.bairro.replaceAll(" ", "%20");
+                    // FlyTo(adress);
+                    FlyTo(adress);
 
-                    let request = new XMLHttpRequest();
-                    var queryAdress = "MG, Belo Horizonte, Rua".concat(usuarioCorrente.rua.concat("%20", usuarioCorrente.bairro));
-                    var link = "https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(queryAdress.concat(".json?access_token=pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZnNhamIyM3N5MnBxcmZuMjU3N2RjIn0.JDtlDJT4jLfJeAArivUVMg"));
+                    // console.log(adress);
+                    // var queryAdress = "MG%20Belo%20Horizonte%20Rua".concat(usuarioCorrente.rua.concat("%20", usuarioCorrente.bairro));
+                    // var link = "https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(adress.concat(".json?access_token=pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZnNhamIyM3N5MnBxcmZuMjU3N2RjIn0.JDtlDJT4jLfJeAArivUVMg"));
 
-                    console.log("GET: ".concat(link));
-                    request.open("GET", link);
-                    request.send();
+                    // console.log("GET: ".concat(link));
+                    // request.onreadystatechange = function () {
 
-                    request.onreadystatechange = function (req) {
+                    //     if (request.status == 200) {
+                    //         var responseObj = JSON.parse(request.responseText);
+                    //         var relevant = getMustRelevantFeature(responseObj.features);
+                    //         console.log("fly !");
+                    //         map.flyTo({
+                    //             center: [
+                    //                 relevant.center[0],
+                    //                 relevant.center[1]
+                    //             ],
+                    //             zoom: 15,
+                    //         });
+                    //     }
+                    // }
+                    // request.open("GET", link);
+                    // request.send();
 
-                        if (req.readyState == 4 && req.status == 200) {
-                            var responseObj = JSON.parse(request.responseText);
-                            var relevant = getMustRelevantFeature(responseObj.features);
-                            map.flyTo({
-                                center: [
-                                    relevant.center[0],
-                                    relevant.center[1]
-                                ],
-                                zoom: 15,
-                                essential: true
-                            });
-                        }
-                    }
                 });
 
                 request.onreadystatechange = function () {
                 };
+            }
+
+            function FlyTo(endereco) {
+                console.log("Flying to: " + endereco);
+                var link = "https://api.mapbox.com/geocoding/v5/mapbox.places/".concat(endereco.concat(".json?access_token=pk.eyJ1IjoidGlhd2dydXBvNSIsImEiOiJja3B5ZnNhamIyM3N5MnBxcmZuMjU3N2RjIn0.JDtlDJT4jLfJeAArivUVMg"));
+
+                console.log("GET: ".concat(link));
+                request = new XMLHttpRequest();
+                request.onreadystatechange = function () {
+
+                    if (request.status == 200) {
+                        var responseObj = JSON.parse(request.responseText);
+                        var relevant = getMustRelevantFeature(responseObj.features);
+                        console.log("fly !");
+                        map.flyTo({
+                            center: [
+                                relevant.center[0],
+                                relevant.center[1]
+                            ],
+                            zoom: 15,
+                        });
+                    }
+                }
+                request.open("GET", link);
+                request.send();
             }
         </script>
         <!-- <div id="map" class="map"></div>
